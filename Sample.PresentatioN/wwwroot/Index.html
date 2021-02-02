@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            data = "";
+            count = 10;
+            $.ajax({
+                url: 'http://localhost:51963/api/Helloworld/GetMessage',
+                type: 'GET',
+                success: function (result) {
+                    if (result != null) {
+                        data = result;
+                        $('#result').text(data);
+                        for (i = 1; i <= count; i++) {
+                            $('#results').append($('#singleResult').clone());
+
+                        }
+                    }
+                    else {
+                        alert(result);
+                    }
+                },
+                failure: function (result) {
+                    alert(result.responseText);
+                },
+                error: function (result) {
+                    alert(result.responseText);
+                }
+            });
+        });
+    </script>
+    <style>
+        .displayNone {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="displayNone">
+        <div id="singleResult">
+            <label style="font-weight:bold;color:black" id="result"></label>
+        </div>
+    </div>
+    <div id="results"></div>
+
+</body>
+</html>
